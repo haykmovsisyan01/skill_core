@@ -1,9 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'token.freezed.dart';
 part 'token.g.dart';
 
+@freezed
 @JsonSerializable()
-class TokenEntity {
+class TokenEntity with _$TokenEntity {
+  @override
   final String token;
 
   TokenEntity({required this.token});

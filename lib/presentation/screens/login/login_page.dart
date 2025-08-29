@@ -31,7 +31,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     ref.listen<AsyncValue<AuthState>>(authNotifierProvider, (prev, next) {
       next.when(
         data: (state) {
-          print('Success');
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           context.go(homeRoute, extra: state.user);
         },
         error: (error, stackTrace) {

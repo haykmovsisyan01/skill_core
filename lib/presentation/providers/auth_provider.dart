@@ -14,7 +14,7 @@ final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(
 class AuthNotifier extends AsyncNotifier<AuthState> {
   @override
   FutureOr<AuthState> build() {
-    return AuthState(message: 'Initial state', failed: false);
+    return AuthState(message: 'Initial state');
   }
 
   Future<void> register(String email, String password) async {
@@ -26,12 +26,10 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     );
 
     if (!entity.failed) {
-      state = AsyncValue.data(
-        AuthState(message: entity.message, failed: entity.failed),
-      );
+      state = AsyncValue.data(AuthState(message: entity.message));
     } else {
       state = AsyncValue.error(
-        AuthState(message: entity.message, failed: entity.failed),
+        AuthState(message: entity.message),
         StackTrace.current,
       );
     }
@@ -49,7 +47,6 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
       state = AsyncValue.data(
         AuthState(
           message: entity.message,
-          failed: entity.failed,
           user: AppUser.fromApi(
             ref.read(firebaseClientProvider).firebase.currentUser!,
           ),
@@ -57,7 +54,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
       );
     } else {
       state = AsyncValue.error(
-        AuthState(message: entity.message, failed: entity.failed),
+        AuthState(message: entity.message),
         StackTrace.current,
       );
     }
@@ -67,20 +64,24 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = AsyncValue.loading();
     final useCase = ref.read(signOutUseCase);
 
-    state = await AsyncValue.guard(() async {
-      await useCase.signOut();
+    final entity = await useCase.signOut();
 
-      return AuthState(message: 'Sign out', failed: false);
-    });
+    if (!entity.failed) {
+      state = AsyncValue.data(AuthState(message: entity.message));
+    } else {
+      state = AsyncValue.error(
+        AuthState(message: entity.message),
+        StackTrace.current,
+      );
+    }
   }
 }
 
 class AuthState {
   final String message;
-  final bool failed;
   final AppUser? user;
 
-  AuthState({required this.message, required this.failed, this.user});
+  AuthState({required this.message, this.user});
 
   @override
   bool operator ==(Object other) =>

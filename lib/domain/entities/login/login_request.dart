@@ -1,9 +1,11 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'login_request.freezed.dart';
 part 'login_request.g.dart';
 
+@freezed
 @JsonSerializable()
-class LoginRequestEntity {
+class LoginRequestEntity with _$LoginRequestEntity {
   final String email;
   final String password;
 

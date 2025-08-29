@@ -1,9 +1,11 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'reg_response.freezed.dart';
 part 'reg_response.g.dart';
 
+@freezed
 @JsonSerializable()
-class RegResponseEntity {
+class RegResponseEntity with _$RegResponseEntity {
   final String message;
   final bool failed;
 

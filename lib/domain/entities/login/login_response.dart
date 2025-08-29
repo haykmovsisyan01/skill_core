@@ -1,10 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:skill_core/domain/entities/token/token.dart';
 
+part 'login_response.freezed.dart';
 part 'login_response.g.dart';
 
+@freezed
 @JsonSerializable()
-class LoginResponseEntity {
+class LoginResponseEntity with _$LoginResponseEntity {
   final String message;
   final bool failed;
   final TokenEntity? token;

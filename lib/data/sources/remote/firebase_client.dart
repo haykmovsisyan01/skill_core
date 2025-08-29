@@ -16,8 +16,6 @@ class FirebaseClient {
         email: entity.email,
         password: entity.password,
       );
-      print('Token: ${response.credential?.token}');
-
       return response;
     } on FirebaseAuthException catch (e) {
       throw AuthException(
@@ -47,6 +45,13 @@ class FirebaseClient {
   }
 
   Future<void> signOut() async {
-    await firebase.signOut();
+    try {
+      await firebase.signOut();
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(
+        message: e.message ?? 'Invalid Error',
+        statusCode: e.code,
+      );
+    }
   }
 }

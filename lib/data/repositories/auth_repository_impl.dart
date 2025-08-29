@@ -7,6 +7,8 @@ import 'package:skill_core/domain/entities/reg/reg_response.dart';
 import 'package:skill_core/domain/entities/token/token.dart';
 import 'package:skill_core/domain/repositories/auth_repository.dart';
 
+import '../../domain/entities/sign_out/sign_out.dart';
+
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseClient client;
 
@@ -32,7 +34,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await client.loginWithEmailAndPassword(entity);
       return LoginResponseEntity(
         message: 'User has been created!',
-        token: TokenEntity(token: response.user!.uid.toString()),
+        token: TokenEntity(token: 'Some token'),
         failed: false,
       );
     } on AuthException catch (e) {
@@ -41,7 +43,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> signOut() async {
-    await client.signOut();
+  Future<SignOutEntity> signOut() async {
+    try {
+      await client.signOut();
+      return SignOutEntity(message: 'Sign out!', failed: false);
+    } on AuthException catch (e) {
+      return SignOutEntity(message: e.message, failed: true);
+    }
   }
 }

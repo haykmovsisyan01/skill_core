@@ -1,9 +1,11 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'reg_request.freezed.dart';
 part 'reg_request.g.dart';
 
+@freezed
 @JsonSerializable()
-class RegRequestEntity {
+class RegRequestEntity with _$RegRequestEntity {
   final String email;
   final String password;
 

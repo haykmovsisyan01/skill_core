@@ -11,10 +11,10 @@ bool validate(String data, RegExp regexp) {
 }
 
 String? validateEmail(String? email) {
-  email = email?.trim();
   if (email == null || email.isEmpty) {
     return 'Email is empty!';
   }
+  email = email.trim();
 
   if (!validate(email, emailRegexp)) {
     return 'Please type valid email';
@@ -25,10 +25,11 @@ String? validateEmail(String? email) {
 }
 
 String? validatePassword(String? password) {
-  password = password?.trim();
   if (password == null || password.isEmpty) {
     return 'Password is empty!';
   }
+
+  password = password.trim();
 
   if (!validate(password, passRegexp)) {
     return 'Password length must be more or equal 8 symbols';
