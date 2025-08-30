@@ -3,6 +3,8 @@ import 'package:skill_core/data/exceptions.dart';
 import 'package:skill_core/domain/entities/login/login_request.dart';
 import 'package:skill_core/domain/entities/reg/reg_request.dart';
 
+import '../../../config/strings.dart';
+
 class FirebaseClient {
   final FirebaseAuth firebase;
 
@@ -19,7 +21,7 @@ class FirebaseClient {
       return response;
     } on FirebaseAuthException catch (e) {
       throw AuthException(
-        message: e.message ?? 'Invalid error',
+        message: e.message ?? unknownError,
         statusCode: e.code,
       );
     }
@@ -33,12 +35,10 @@ class FirebaseClient {
         email: entity.email,
         password: entity.password,
       );
-      print('Token: ${response.credential?.token}');
-
       return response;
     } on FirebaseAuthException catch (e) {
       throw AuthException(
-        message: e.message ?? 'Invalid error',
+        message: e.message ?? unknownError,
         statusCode: e.code,
       );
     }
@@ -49,7 +49,7 @@ class FirebaseClient {
       await firebase.signOut();
     } on FirebaseAuthException catch (e) {
       throw AuthException(
-        message: e.message ?? 'Invalid Error',
+        message: e.message ?? unknownError,
         statusCode: e.code,
       );
     }

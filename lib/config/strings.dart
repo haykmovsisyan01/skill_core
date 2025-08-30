@@ -1,1 +1,10 @@
 const String appName = 'Skill Core';
+const String skillCoreSlogan = 'Skill Core. Learn. Practice. Master.';
+const String getStarted = 'Get started -> ';
+const String alreadyHaveAcc = 'Already have an account?';
+const String signUp = 'Sign Up';
+const String login = 'Login';
+const String email = 'Email';
+const String password = 'Password';
+const String confirmPassword = 'Confirm Password';
+const String unknownError = 'Unknown error';

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skill_core/config/colors.dart';
 import 'package:skill_core/presentation/routes.dart';
-import 'package:skill_core/presentation/screens/riverpod_example.dart';
 import 'package:skill_core/presentation/widgets/sc_button.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
 
 import '../../../config/constants.dart';
+import '../../../config/strings.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -43,23 +43,15 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: MediaQuery.sizeOf(context).width / 3,
                 height: MediaQuery.sizeOf(context).width / 3,
               ),
-              ScText('Welcome to Skill Core!', fontSize: 30),
+              ScText('Welcome to $appName!', fontSize: 30),
               SizedBox(height: MediaQuery.sizeOf(context).height / 25),
-              ScText(
-                'Skill Core. Learn. Practice. Master.',
-                fontSize: 15,
-                color: Colors.black,
-              ),
+              ScText(skillCoreSlogan, fontSize: 15, color: Colors.black),
               Expanded(flex: 3, child: Placeholder()),
               ScButton(
                 onPressed: () {
                   context.push(signUpRoute);
                 },
-                child: ScText(
-                  'Get started -> ',
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
+                child: ScText(getStarted, color: Colors.white, fontSize: 20),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -67,11 +59,11 @@ class _WelcomePageState extends State<WelcomePage> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Already have an account?',
+                        text: alreadyHaveAcc,
                         style: TextStyle(color: Colors.black),
                       ),
                       TextSpan(
-                        text: ' Sign In!',
+                        text: login,
                         style: TextStyle(color: primaryColor),
                         recognizer: recognizer,
                       ),

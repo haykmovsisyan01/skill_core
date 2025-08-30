@@ -6,6 +6,7 @@ import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
 import 'package:skill_core/presentation/widgets/sc_text_field.dart';
 
+import '../../../config/strings.dart';
 import '../../../config/utils.dart';
 import '../../widgets/sc_button.dart';
 
@@ -35,7 +36,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           context.go(homeRoute, extra: state.user);
         },
         error: (error, stackTrace) {
-          print('Error');
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text((error as AuthState).message)));
@@ -52,7 +52,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       body: Center(
         child: Column(
           children: [
-            ScText('Log in', fontSize: 30),
+            ScText(login, fontSize: 30),
             Form(
               key: _formKey,
               child: Column(
@@ -66,7 +66,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       FocusScope.of(context).requestFocus(passwordNode);
                     },
                     keyboardType: TextInputType.emailAddress,
-                    labelText: 'Email',
+                    labelText: email,
                   ),
                   ScTextField(
                     padding: EdgeInsets.all(10),
@@ -74,7 +74,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     focusNode: passwordNode,
                     validator: validatePassword,
                     keyboardType: TextInputType.visiblePassword,
-                    labelText: 'Password',
+                    labelText: password,
                     obscureText: !isVisiblePassword,
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -102,9 +102,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         passwordController.text.trim(),
                       );
                 }
-                print('Login');
               },
-              child: ScText('Login'),
+              child: ScText(login),
             ),
           ],
         ),

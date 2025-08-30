@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skill_core/config/strings.dart';
 import 'package:skill_core/config/utils.dart';
 import 'package:skill_core/presentation/providers/auth_provider.dart';
 import 'package:skill_core/presentation/widgets/sc_button.dart';
@@ -35,13 +36,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     ref.listen<AsyncValue<AuthState>>(authNotifierProvider, (prev, next) {
       next.when(
         data: (state) {
-          print('Success');
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
         },
         error: (error, stackTrace) {
-          print('Error');
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text((error as AuthState).message)));
@@ -59,7 +58,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         child: Center(
           child: Column(
             children: [
-              ScText('Sign Up', fontSize: 40),
+              ScText(signUp, fontSize: 40),
               Form(
                 key: _formKey,
                 child: Column(
@@ -74,7 +73,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                         FocusScope.of(context).requestFocus(passwordNode);
                       },
                       keyboardType: TextInputType.emailAddress,
-                      labelText: 'Email',
+                      labelText: email,
                     ),
                     ScTextField(
                       padding: EdgeInsets.all(10),
@@ -82,7 +81,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                       focusNode: passwordNode,
                       validator: validatePassword,
                       keyboardType: TextInputType.visiblePassword,
-                      labelText: 'Password',
+                      labelText: password,
                       obscureText: !isVisiblePassword,
                       onFieldSubmitted: (data) {
                         FocusScope.of(
@@ -112,7 +111,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             : 'Passwords dont match!';
                       },
                       keyboardType: TextInputType.visiblePassword,
-                      labelText: 'Confirm Password',
+                      labelText: confirmPassword,
                       obscureText: !isVisiblePasswordConfirm,
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -138,9 +137,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                 passwordController.text.trim(),
                               );
                         }
-                        print('Sign up');
                       },
-                      child: ScText('Sign up'),
+                      child: ScText(signUp),
                     ),
                   ],
                 ),
