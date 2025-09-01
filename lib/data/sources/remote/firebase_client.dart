@@ -44,6 +44,17 @@ class FirebaseClient {
     }
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await firebase.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(
+        message: e.message ?? unknownError,
+        statusCode: e.code,
+      );
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await firebase.signOut();

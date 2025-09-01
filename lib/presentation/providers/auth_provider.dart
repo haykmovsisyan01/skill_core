@@ -29,7 +29,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
       state = AsyncValue.data(AuthState(message: entity.message));
     } else {
       state = AsyncValue.error(
-        AuthState(message: entity.message),
+        AuthState(errorMessage: entity.message),
         StackTrace.current,
       );
     }
@@ -54,10 +54,22 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
       );
     } else {
       state = AsyncValue.error(
-        AuthState(message: entity.message),
+        AuthState(errorMessage: entity.message),
         StackTrace.current,
       );
     }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    state = AsyncValue.loading();
+
+    final useCase = ref.watch(sendPasswordResetEmailUseCase);
+
+    await useCase.sendPasswordResetEmail(email);
+
+    state = AsyncValue.data(
+      AuthState(message: 'Success', isPasswordResetMailSent: true),
+    );
   }
 
   Future<void> signOut() async {
@@ -70,7 +82,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
       state = AsyncValue.data(AuthState(message: entity.message));
     } else {
       state = AsyncValue.error(
-        AuthState(message: entity.message),
+        AuthState(errorMessage: entity.message),
         StackTrace.current,
       );
     }
@@ -78,10 +90,17 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
 }
 
 class AuthState {
-  final String message;
+  final String? message;
+  final String? errorMessage;
   final AppUser? user;
+  final bool isPasswordResetMailSent;
 
-  AuthState({required this.message, this.user});
+  AuthState({
+    this.message,
+    this.errorMessage,
+    this.user,
+    this.isPasswordResetMailSent = false,
+  });
 
   @override
   bool operator ==(Object other) =>
@@ -92,4 +111,17 @@ class AuthState {
 
   @override
   int get hashCode => message.hashCode;
+
+  AuthState copyWith(
+    String? message,
+    String? errorMessage,
+    AppUser? user,
+    bool? isPasswordResetMailSent,
+  ) => AuthState(
+    message: message ?? this.message,
+    errorMessage: errorMessage ?? this.errorMessage,
+    user: user ?? this.user,
+    isPasswordResetMailSent:
+        isPasswordResetMailSent ?? this.isPasswordResetMailSent,
+  );
 }

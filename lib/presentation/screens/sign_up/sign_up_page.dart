@@ -38,12 +38,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         data: (state) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ).showSnackBar(SnackBar(content: Text(state.message!)));
         },
         error: (error, stackTrace) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text((error as AuthState).message)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text((error as AuthState).errorMessage!)),
+          );
         },
         loading: () {
           ScaffoldMessenger.of(context).showSnackBar(

@@ -51,4 +51,13 @@ class AuthRepositoryImpl implements AuthRepository {
       return SignOutEntity(message: e.message, failed: true);
     }
   }
+
+  @override
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await client.sendPasswordResetEmail(email);
+    } on AuthException catch (e) {
+      print(e.message);
+    }
+  }
 }

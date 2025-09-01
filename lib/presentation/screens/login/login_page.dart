@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skill_core/config/colors.dart';
 import 'package:skill_core/presentation/providers/auth_provider.dart';
 import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
@@ -21,6 +23,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  TapGestureRecognizer recognizer = TapGestureRecognizer();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      recognizer.onTap = () {
+        context.push(passwordResetRoute);
+      };
+    });
+    super.initState();
+  }
 
   final FocusNode emailNode = FocusNode();
   final FocusNode passwordNode = FocusNode();
@@ -32,13 +45,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     ref.listen<AsyncValue<AuthState>>(authNotifierProvider, (prev, next) {
       next.when(
         data: (state) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          context.go(homeRoute, extra: state.user);
+          if (state.isPasswordResetMailSent) {
+            context.go(welcomeRoute);
+          } else {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            context.go(homeRoute, extra: state.user);
+          }
         },
         error: (error, stackTrace) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text((error as AuthState).message)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text((error as AuthState).errorMessage!)),
+          );
         },
         loading: () {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -104,6 +121,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 }
               },
               child: ScText(login),
+            ),
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Have password forgotten?',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  TextSpan(
+                    text: 'Click here',
+                    style: TextStyle(color: primaryColor),
+                    recognizer: recognizer,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

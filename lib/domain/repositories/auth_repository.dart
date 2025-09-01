@@ -7,5 +7,6 @@ import 'package:skill_core/domain/entities/sign_out/sign_out.dart';
 abstract class AuthRepository {
   Future<LoginResponseEntity> login(LoginRequestEntity entity);
   Future<RegResponseEntity> register(RegRequestEntity entity);
+  Future<void> sendPasswordResetEmail(String email);
   Future<SignOutEntity> signOut();
 }
