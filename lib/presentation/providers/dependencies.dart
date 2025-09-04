@@ -1,15 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skill_core/data/repositories/auth_repository_impl.dart';
-import 'package:skill_core/data/sources/remote/firebase_client.dart';
+import 'package:skill_core/data/sources/remote/firebase_auth_client.dart';
 import 'package:skill_core/domain/repositories/auth_repository.dart';
 import 'package:skill_core/domain/usecases/login_usecase.dart';
 import 'package:skill_core/domain/usecases/register_usecase.dart';
 import 'package:skill_core/domain/usecases/send_password_reset_email_usecase.dart';
 import 'package:skill_core/domain/usecases/sign_out_usecase.dart';
 
-final firebaseClientProvider = Provider<FirebaseClient>(
-  (ref) => FirebaseClient(FirebaseAuth.instance),
+import '../../data/sources/local/shared_preferences.dart';
+import '../../domain/usecases/shared_pref_usecase.dart';
+
+final firebaseClientProvider = Provider<FirebaseAuthClient>(
+  (ref) => FirebaseAuthClient(FirebaseAuth.instance),
 );
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
@@ -37,4 +40,8 @@ final sendPasswordResetEmailUseCase = Provider((ref) {
   final repository = ref.watch(authRepositoryProvider);
 
   return SendPasswordResetEmailUseCase(repository);
+});
+
+final sharedPreferencesUseCase = Provider((ref) {
+  return SharedPrefUseCase(preferences: preferences);
 });

@@ -44,11 +44,16 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     );
 
     if (!entity.failed) {
+      await ref
+          .read(sharedPreferencesUseCase)
+          .put('token', entity.token!.token);
+      print(ref.read(sharedPreferencesUseCase).get('token'));
       state = AsyncValue.data(
         AuthState(
           message: entity.message,
           user: AppUser.fromApi(
             ref.read(firebaseClientProvider).firebase.currentUser!,
+            null,
           ),
         ),
       );
@@ -79,7 +84,9 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     final entity = await useCase.signOut();
 
     if (!entity.failed) {
+      await ref.watch(sharedPreferencesUseCase).remove('token');
       state = AsyncValue.data(AuthState(message: entity.message));
+      print(ref.watch(sharedPreferencesUseCase).get('token'));
     } else {
       state = AsyncValue.error(
         AuthState(errorMessage: entity.message),

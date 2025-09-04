@@ -5,10 +5,10 @@ import 'package:skill_core/domain/entities/reg/reg_request.dart';
 
 import '../../../config/strings.dart';
 
-class FirebaseClient {
+class FirebaseAuthClient {
   final FirebaseAuth firebase;
 
-  FirebaseClient(this.firebase);
+  FirebaseAuthClient(this.firebase);
 
   Future<UserCredential> registerWithEmailAndPassword(
     RegRequestEntity entity,

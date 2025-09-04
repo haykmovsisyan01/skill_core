@@ -13,8 +13,11 @@ class AppUser {
     this.avatar,
   });
 
-  factory AppUser.fromApi(User user) =>
-      AppUser(name: 'Name', email: user.email!, uid: user.uid);
+  factory AppUser.fromApi(User user, Map<String, dynamic>? userInfo) => AppUser(
+    name: userInfo?['name'] ?? 'Unknown name',
+    email: user.email!,
+    uid: user.uid,
+  );
 
   AppUser copyWith(String? name, String? email, String? uid, String? avatar) {
     return AppUser(

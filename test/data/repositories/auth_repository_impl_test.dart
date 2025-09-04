@@ -3,20 +3,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:skill_core/data/exceptions.dart';
 import 'package:skill_core/data/repositories/auth_repository_impl.dart';
-import 'package:skill_core/data/sources/remote/firebase_client.dart';
+import 'package:skill_core/data/sources/remote/firebase_auth_client.dart';
 import 'package:skill_core/domain/entities/login/login_request.dart';
 import 'package:skill_core/domain/entities/login/login_response.dart';
 import 'package:skill_core/domain/entities/reg/reg_request.dart';
 import 'package:skill_core/domain/entities/reg/reg_response.dart';
 import 'package:skill_core/domain/entities/sign_out/sign_out.dart';
 
-class MockFirebaseClient extends Mock implements FirebaseClient {}
+class MockFirebaseClient extends Mock implements FirebaseAuthClient {}
 
 class MockUserCredential extends Mock implements UserCredential {}
 
 void main() {
   group('Test auth repository', () {
-    late FirebaseClient mockFirebaseClient;
+    late FirebaseAuthClient mockFirebaseClient;
     late UserCredential mockUserCredential;
     late AuthRepositoryImpl authRepositoryImpl;
 
