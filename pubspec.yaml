@@ -42,10 +42,6 @@ flutter:
     - assets/fonts/
     - assets/logos/
   fonts:
-    - family: LexandDeca
-      fonts:
-        - asset: assets/fonts/LexendDeca/LexendDeca-Regular.ttf
-          style: normal
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto/static/Roboto-Regular.ttf
