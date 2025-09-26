@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skill_core/config/constants.dart';
 
 class ScText extends StatelessWidget {
   final String text;
@@ -13,7 +14,7 @@ class ScText extends StatelessWidget {
     this.fontSize = 12,
     this.color,
     this.padding,
-    this.fontFamily = '',
+    this.fontFamily = robotoFont,
   });
 
   @override
