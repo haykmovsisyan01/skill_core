@@ -3,8 +3,6 @@ import 'package:skill_core/data/exceptions.dart';
 import 'package:skill_core/domain/entities/login/login_request.dart';
 import 'package:skill_core/domain/entities/reg/reg_request.dart';
 
-import '../../../config/strings.dart';
-
 class FirebaseAuthClient {
   final FirebaseAuth firebase;
 
@@ -20,10 +18,7 @@ class FirebaseAuthClient {
       );
       return response;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(
-        message: e.message ?? unknownError,
-        statusCode: e.code,
-      );
+      throw AuthException.fromCode(e.code);
     }
   }
 
@@ -37,10 +32,7 @@ class FirebaseAuthClient {
       );
       return response;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(
-        message: e.message ?? unknownError,
-        statusCode: e.code,
-      );
+      throw AuthException.fromCode(e.code);
     }
   }
 
@@ -48,10 +40,7 @@ class FirebaseAuthClient {
     try {
       await firebase.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw AuthException(
-        message: e.message ?? unknownError,
-        statusCode: e.code,
-      );
+      throw AuthException.fromCode(e.code);
     }
   }
 
@@ -59,10 +48,7 @@ class FirebaseAuthClient {
     try {
       await firebase.signOut();
     } on FirebaseAuthException catch (e) {
-      throw AuthException(
-        message: e.message ?? unknownError,
-        statusCode: e.code,
-      );
+      throw AuthException.fromCode(e.code);
     }
   }
 }

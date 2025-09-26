@@ -1,30 +1,31 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import '../../domain/entities/user/user.dart';
 
 class AppUser {
   final String name;
+  final String surname;
   final String email;
   final String uid;
-  final String? avatar;
 
   AppUser({
     required this.name,
+    required this.surname,
     required this.email,
     required this.uid,
-    this.avatar,
   });
 
-  factory AppUser.fromApi(User user, Map<String, dynamic>? userInfo) => AppUser(
-    name: userInfo?['name'] ?? 'Unknown name',
-    email: user.email!,
-    uid: user.uid,
+  factory AppUser.fromApi(UserEntity userInfo) => AppUser(
+    name: userInfo.name!,
+    surname: userInfo.surname!,
+    email: userInfo.email!,
+    uid: userInfo.uid!,
   );
 
-  AppUser copyWith(String? name, String? email, String? uid, String? avatar) {
+  AppUser copyWith(String? name, String? surname, String? email, String? uid) {
     return AppUser(
       name: name ?? this.name,
+      surname: surname ?? this.surname,
       email: email ?? this.email,
       uid: uid ?? this.uid,
-      avatar: avatar ?? this.avatar,
     );
   }
 

@@ -20,7 +20,8 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await client.registerWithEmailAndPassword(entity);
 
       return RegResponseEntity(
-        message: 'User has been created!',
+        message: 'User has been created.',
+        uid: response.user!.uid,
         failed: false,
       );
     } on AuthException catch (e) {
@@ -32,8 +33,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<LoginResponseEntity> login(LoginRequestEntity entity) async {
     try {
       final response = await client.loginWithEmailAndPassword(entity);
+
+      /// Using user.uid as a token
       return LoginResponseEntity(
-        message: 'User has been created!',
+        message: 'Login success.',
         token: TokenEntity(token: response.user!.uid),
         failed: false,
       );

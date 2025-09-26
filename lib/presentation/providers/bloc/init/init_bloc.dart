@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:skill_core/domain/usecases/shared_pref_usecase.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_core/domain/usecases/local/shared_pref_usecase.dart';
 
 part 'init_event.dart';
 part 'init_state.dart';
@@ -14,7 +14,6 @@ class InitBloc extends Bloc<InitEvent, InitState> {
 
   checkInit(InitCheckEvent event, Emitter<InitState> emit) async {
     await Future.delayed(Duration(milliseconds: 800));
-    print(useCase.get('token'));
     if (useCase.get('token') == null) {
       emit(InitCheckedState(false));
     } else {

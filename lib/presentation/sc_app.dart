@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' hide Transition;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skill_core/presentation/providers/bloc/guide/guide_bloc.dart';
 import 'package:skill_core/presentation/providers/bloc/init/init_bloc.dart';
+import 'package:skill_core/presentation/providers/bloc/test/test_bloc.dart';
 import 'package:skill_core/presentation/providers/dependencies.dart';
 import 'package:skill_core/presentation/routes.dart';
 
@@ -19,6 +21,8 @@ class SCApp extends ConsumerWidget {
               InitBloc(ref.read(sharedPreferencesUseCase))
                 ..add(InitCheckEvent()),
         ),
+        BlocProvider(create: (_) => GuideBloc(ref.read(fetchAllGuidesUseCase))),
+        BlocProvider(create: (_) => TestBloc(ref.read(fetchAllTestsUseCase))),
       ],
       child: MaterialApp.router(
         routerConfig: router,

@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skill_core/domain/entities/login/login_request.dart';
+import 'package:skill_core/domain/entities/user/user.dart';
 import 'package:skill_core/presentation/providers/dependencies.dart';
+import 'package:skill_core/presentation/providers/user_provider.dart';
 
 import '../../data/models/user_model.dart';
 import '../../domain/entities/reg/reg_request.dart';
@@ -19,13 +21,18 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
 
   Future<void> register(String email, String password) async {
     state = AsyncValue.loading();
-    final useCase = ref.read(regUseCase);
+    final registerUseCase = ref.read(regUseCase);
+    final userUseCase = ref.read(userFireStoreUseCase);
 
-    final entity = await useCase.register(
+    final entity = await registerUseCase.register(
       RegRequestEntity(email: email, password: password),
     );
 
     if (!entity.failed) {
+      userUseCase.addUser(
+        entity.uid!,
+        UserEntity(email: email, uid: entity.uid, createdDate: DateTime.now()),
+      );
       state = AsyncValue.data(AuthState(message: entity.message));
     } else {
       state = AsyncValue.error(
@@ -38,25 +45,17 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
   Future<void> login(String email, String password) async {
     state = AsyncValue.loading();
     final useCase = ref.read(loginUseCase);
-
     final entity = await useCase.login(
       LoginRequestEntity(email: email, password: password),
     );
 
     if (!entity.failed) {
+      /// Put token into shared preferences
       await ref
           .read(sharedPreferencesUseCase)
           .put('token', entity.token!.token);
-      print(ref.read(sharedPreferencesUseCase).get('token'));
-      state = AsyncValue.data(
-        AuthState(
-          message: entity.message,
-          user: AppUser.fromApi(
-            ref.read(firebaseClientProvider).firebase.currentUser!,
-            null,
-          ),
-        ),
-      );
+
+      state = AsyncValue.data(AuthState(message: entity.message));
     } else {
       state = AsyncValue.error(
         AuthState(errorMessage: entity.message),
@@ -85,8 +84,8 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
 
     if (!entity.failed) {
       await ref.watch(sharedPreferencesUseCase).remove('token');
+      ref.read(appUserState.notifier).state = null;
       state = AsyncValue.data(AuthState(message: entity.message));
-      print(ref.watch(sharedPreferencesUseCase).get('token'));
     } else {
       state = AsyncValue.error(
         AuthState(errorMessage: entity.message),

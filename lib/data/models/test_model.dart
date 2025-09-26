@@ -4,7 +4,7 @@ import 'package:skill_core/data/models/result_model.dart';
 class TestModel {
   final String title;
   final String description;
-  final String id;
+  final int id;
   final Set<Question> questions;
   final Result? result;
 
@@ -19,7 +19,7 @@ class TestModel {
   TestModel copyWith(
     String? title,
     String? description,
-    String? id,
+    int? id,
     Set<Question>? questions,
     Result? result,
   ) => TestModel(

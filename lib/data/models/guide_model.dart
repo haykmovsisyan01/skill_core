@@ -1,6 +1,6 @@
 class GuideModel {
   final String title;
-  final String id;
+  final int id;
   final String author;
   final String content;
 
@@ -18,4 +18,9 @@ class GuideModel {
 
   @override
   int get hashCode => id.hashCode;
+
+  @override
+  String toString() {
+    return 'GuideModel{title: $title, id: $id, author: $author, content: $content}';
+  }
 }

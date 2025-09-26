@@ -42,6 +42,7 @@ class ScTextField extends StatelessWidget {
         onTapOutside: (_) {
           FocusScope.of(context).unfocus();
         },
+
         onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
           hintText: hintText,

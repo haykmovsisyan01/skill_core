@@ -14,7 +14,6 @@ class SharedPrefUseCase {
         return await preferences.setBool(key, value);
 
       case String _:
-        print('IN USECASE');
         return await preferences.setString(key, value);
 
       case double _:
