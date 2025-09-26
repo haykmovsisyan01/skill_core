@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'reg_response.dart';
+part of 'question.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,40 +13,40 @@ part of 'reg_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$RegResponseEntity {
+mixin _$QuestionEntity {
 
- String get message; String? get uid; bool get failed;
-/// Create a copy of RegResponseEntity
+ String get question; Set<String> get answers; String get rightAnswer;
+/// Create a copy of QuestionEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$RegResponseEntityCopyWith<RegResponseEntity> get copyWith => _$RegResponseEntityCopyWithImpl<RegResponseEntity>(this as RegResponseEntity, _$identity);
+$QuestionEntityCopyWith<QuestionEntity> get copyWith => _$QuestionEntityCopyWithImpl<QuestionEntity>(this as QuestionEntity, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegResponseEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.failed, failed) || other.failed == failed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestionEntity&&(identical(other.question, question) || other.question == question)&&const DeepCollectionEquality().equals(other.answers, answers)&&(identical(other.rightAnswer, rightAnswer) || other.rightAnswer == rightAnswer));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,uid,failed);
+int get hashCode => Object.hash(runtimeType,question,const DeepCollectionEquality().hash(answers),rightAnswer);
 
 @override
 String toString() {
-  return 'RegResponseEntity(message: $message, uid: $uid, failed: $failed)';
+  return 'QuestionEntity(question: $question, answers: $answers, rightAnswer: $rightAnswer)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $RegResponseEntityCopyWith<$Res>  {
-  factory $RegResponseEntityCopyWith(RegResponseEntity value, $Res Function(RegResponseEntity) _then) = _$RegResponseEntityCopyWithImpl;
+abstract mixin class $QuestionEntityCopyWith<$Res>  {
+  factory $QuestionEntityCopyWith(QuestionEntity value, $Res Function(QuestionEntity) _then) = _$QuestionEntityCopyWithImpl;
 @useResult
 $Res call({
- String message, String? uid, bool failed
+ String question, Set<String> answers, String rightAnswer
 });
 
 
@@ -54,29 +54,29 @@ $Res call({
 
 }
 /// @nodoc
-class _$RegResponseEntityCopyWithImpl<$Res>
-    implements $RegResponseEntityCopyWith<$Res> {
-  _$RegResponseEntityCopyWithImpl(this._self, this._then);
+class _$QuestionEntityCopyWithImpl<$Res>
+    implements $QuestionEntityCopyWith<$Res> {
+  _$QuestionEntityCopyWithImpl(this._self, this._then);
 
-  final RegResponseEntity _self;
-  final $Res Function(RegResponseEntity) _then;
+  final QuestionEntity _self;
+  final $Res Function(QuestionEntity) _then;
 
-/// Create a copy of RegResponseEntity
+/// Create a copy of QuestionEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? uid = freezed,Object? failed = null,}) {
-  return _then(RegResponseEntity(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,uid: freezed == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String?,failed: null == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
-as bool,
+@pragma('vm:prefer-inline') @override $Res call({Object? question = null,Object? answers = null,Object? rightAnswer = null,}) {
+  return _then(QuestionEntity(
+question: null == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
+as String,answers: null == answers ? _self.answers : answers // ignore: cast_nullable_to_non_nullable
+as Set<String>,rightAnswer: null == rightAnswer ? _self.rightAnswer : rightAnswer // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [RegResponseEntity].
-extension RegResponseEntityPatterns on RegResponseEntity {
+/// Adds pattern-matching-related methods to [QuestionEntity].
+extension QuestionEntityPatterns on QuestionEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:

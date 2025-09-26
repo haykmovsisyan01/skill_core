@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'reg_response.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,40 +13,40 @@ part of 'reg_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$RegResponseEntity {
+mixin _$UserEntity {
 
- String get message; String? get uid; bool get failed;
-/// Create a copy of RegResponseEntity
+ String? get name; String? get surname; String? get email; String? get uid; DateTime? get createdDate;
+/// Create a copy of UserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$RegResponseEntityCopyWith<RegResponseEntity> get copyWith => _$RegResponseEntityCopyWithImpl<RegResponseEntity>(this as RegResponseEntity, _$identity);
+$UserEntityCopyWith<UserEntity> get copyWith => _$UserEntityCopyWithImpl<UserEntity>(this as UserEntity, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegResponseEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.failed, failed) || other.failed == failed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserEntity&&(identical(other.name, name) || other.name == name)&&(identical(other.surname, surname) || other.surname == surname)&&(identical(other.email, email) || other.email == email)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.createdDate, createdDate) || other.createdDate == createdDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,uid,failed);
+int get hashCode => Object.hash(runtimeType,name,surname,email,uid,createdDate);
 
 @override
 String toString() {
-  return 'RegResponseEntity(message: $message, uid: $uid, failed: $failed)';
+  return 'UserEntity(name: $name, surname: $surname, email: $email, uid: $uid, createdDate: $createdDate)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $RegResponseEntityCopyWith<$Res>  {
-  factory $RegResponseEntityCopyWith(RegResponseEntity value, $Res Function(RegResponseEntity) _then) = _$RegResponseEntityCopyWithImpl;
+abstract mixin class $UserEntityCopyWith<$Res>  {
+  factory $UserEntityCopyWith(UserEntity value, $Res Function(UserEntity) _then) = _$UserEntityCopyWithImpl;
 @useResult
 $Res call({
- String message, String? uid, bool failed
+ String? name, String? surname, String? email, String? uid, DateTime? createdDate
 });
 
 
@@ -54,29 +54,31 @@ $Res call({
 
 }
 /// @nodoc
-class _$RegResponseEntityCopyWithImpl<$Res>
-    implements $RegResponseEntityCopyWith<$Res> {
-  _$RegResponseEntityCopyWithImpl(this._self, this._then);
+class _$UserEntityCopyWithImpl<$Res>
+    implements $UserEntityCopyWith<$Res> {
+  _$UserEntityCopyWithImpl(this._self, this._then);
 
-  final RegResponseEntity _self;
-  final $Res Function(RegResponseEntity) _then;
+  final UserEntity _self;
+  final $Res Function(UserEntity) _then;
 
-/// Create a copy of RegResponseEntity
+/// Create a copy of UserEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? uid = freezed,Object? failed = null,}) {
-  return _then(RegResponseEntity(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,uid: freezed == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String?,failed: null == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
-as bool,
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? surname = freezed,Object? email = freezed,Object? uid = freezed,Object? createdDate = freezed,}) {
+  return _then(UserEntity(
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,surname: freezed == surname ? _self.surname : surname // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,uid: freezed == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as String?,createdDate: freezed == createdDate ? _self.createdDate : createdDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [RegResponseEntity].
-extension RegResponseEntityPatterns on RegResponseEntity {
+/// Adds pattern-matching-related methods to [UserEntity].
+extension UserEntityPatterns on UserEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:

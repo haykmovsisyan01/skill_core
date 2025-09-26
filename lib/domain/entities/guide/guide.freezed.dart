@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'reg_response.dart';
+part of 'guide.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,40 +13,40 @@ part of 'reg_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$RegResponseEntity {
+mixin _$GuideEntity {
 
- String get message; String? get uid; bool get failed;
-/// Create a copy of RegResponseEntity
+ String get title; int get id; String get author; String get content;
+/// Create a copy of GuideEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$RegResponseEntityCopyWith<RegResponseEntity> get copyWith => _$RegResponseEntityCopyWithImpl<RegResponseEntity>(this as RegResponseEntity, _$identity);
+$GuideEntityCopyWith<GuideEntity> get copyWith => _$GuideEntityCopyWithImpl<GuideEntity>(this as GuideEntity, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegResponseEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.failed, failed) || other.failed == failed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GuideEntity&&(identical(other.title, title) || other.title == title)&&(identical(other.id, id) || other.id == id)&&(identical(other.author, author) || other.author == author)&&(identical(other.content, content) || other.content == content));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,uid,failed);
+int get hashCode => Object.hash(runtimeType,title,id,author,content);
 
 @override
 String toString() {
-  return 'RegResponseEntity(message: $message, uid: $uid, failed: $failed)';
+  return 'GuideEntity(title: $title, id: $id, author: $author, content: $content)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $RegResponseEntityCopyWith<$Res>  {
-  factory $RegResponseEntityCopyWith(RegResponseEntity value, $Res Function(RegResponseEntity) _then) = _$RegResponseEntityCopyWithImpl;
+abstract mixin class $GuideEntityCopyWith<$Res>  {
+  factory $GuideEntityCopyWith(GuideEntity value, $Res Function(GuideEntity) _then) = _$GuideEntityCopyWithImpl;
 @useResult
 $Res call({
- String message, String? uid, bool failed
+ String title, int id, String author, String content
 });
 
 
@@ -54,29 +54,30 @@ $Res call({
 
 }
 /// @nodoc
-class _$RegResponseEntityCopyWithImpl<$Res>
-    implements $RegResponseEntityCopyWith<$Res> {
-  _$RegResponseEntityCopyWithImpl(this._self, this._then);
+class _$GuideEntityCopyWithImpl<$Res>
+    implements $GuideEntityCopyWith<$Res> {
+  _$GuideEntityCopyWithImpl(this._self, this._then);
 
-  final RegResponseEntity _self;
-  final $Res Function(RegResponseEntity) _then;
+  final GuideEntity _self;
+  final $Res Function(GuideEntity) _then;
 
-/// Create a copy of RegResponseEntity
+/// Create a copy of GuideEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? uid = freezed,Object? failed = null,}) {
-  return _then(RegResponseEntity(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,uid: freezed == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String?,failed: null == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
-as bool,
+@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? id = null,Object? author = null,Object? content = null,}) {
+  return _then(GuideEntity(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
+as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [RegResponseEntity].
-extension RegResponseEntityPatterns on RegResponseEntity {
+/// Adds pattern-matching-related methods to [GuideEntity].
+extension GuideEntityPatterns on GuideEntity {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:

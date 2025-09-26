@@ -9,8 +9,13 @@ part of 'reg_response.dart';
 RegResponseEntity _$RegResponseEntityFromJson(Map<String, dynamic> json) =>
     RegResponseEntity(
       message: json['message'] as String,
+      uid: json['uid'] as String?,
       failed: json['failed'] as bool,
     );
 
 Map<String, dynamic> _$RegResponseEntityToJson(RegResponseEntity instance) =>
-    <String, dynamic>{'message': instance.message, 'failed': instance.failed};
+    <String, dynamic>{
+      'message': instance.message,
+      'uid': instance.uid,
+      'failed': instance.failed,
+    };
