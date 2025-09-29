@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
+import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/widgets/sc_button.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
 
@@ -19,7 +21,12 @@ class TestWidget extends StatelessWidget {
           children: [
             ScText(test.title),
             ScText(test.id.toString()),
-            ScButton(onPressed: () {}, child: ScText('Read ->')),
+            ScButton(
+              onPressed: () {
+                context.push(testRoute, extra: test);
+              },
+              child: ScText('Read ->'),
+            ),
           ],
         ),
       ),

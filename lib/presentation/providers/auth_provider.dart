@@ -77,7 +77,6 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
   }
 
   Future<void> signOut() async {
-    state = AsyncValue.loading();
     final useCase = ref.read(signOutUseCase);
 
     final entity = await useCase.signOut();

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skill_core/presentation/screens/app_manager.dart';
+import 'package:skill_core/presentation/screens/guides/guide_page.dart';
 import 'package:skill_core/presentation/screens/guides/guides_page.dart';
 import 'package:skill_core/presentation/screens/home/home_page.dart';
 import 'package:skill_core/presentation/screens/login/login_page.dart';
 import 'package:skill_core/presentation/screens/login/password_reset_page.dart';
 import 'package:skill_core/presentation/screens/settings/settings_page.dart';
 import 'package:skill_core/presentation/screens/sign_up/sign_up_page.dart';
+import 'package:skill_core/presentation/screens/tests/test_page.dart';
 import 'package:skill_core/presentation/screens/tests/tests_page.dart';
 import 'package:skill_core/presentation/screens/welcome/welcome_page.dart';
 
@@ -22,6 +24,7 @@ const String guidesRoute = '/guides';
 const String guideRoute = '/guide';
 
 const String testsRoute = '/tests';
+const String testRoute = '/test';
 const String testResultRoute = '/test_result';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey();
@@ -77,18 +80,24 @@ GoRouter _router = GoRouter(
         return MaterialPage(child: GuidesPage());
       },
     ),
-    // GoRoute(path: guideRoute, pageBuilder: (context,state){
-    //   return MaterialPage(child: WelcomePage());
-    // }),      /// args
+    GoRoute(
+      path: guideRoute,
+      pageBuilder: (context, state) {
+        return MaterialPage(child: GuidePage(), arguments: state.extra);
+      },
+    ),
     GoRoute(
       path: testsRoute,
       pageBuilder: (context, state) {
         return MaterialPage(child: TestsPage());
       },
     ),
-    // GoRoute(path: testResultRoute, pageBuilder: (context,state){
-    //   return MaterialPage(child: WelcomePage());
-    // }), /// args
+    GoRoute(
+      path: testRoute,
+      pageBuilder: (context, state) {
+        return MaterialPage(child: TestPage(), arguments: state.extra);
+      },
+    ),
   ],
 );
 
