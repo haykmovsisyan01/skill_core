@@ -47,11 +47,6 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   }
 
   finishQuiz(QuizFinishEvent event, Emitter<QuizState> emit) {
-    if (correctAnswers == 0) {
-      emit(
-        QuizResultState(Result(correctAnswers: 0, wrongAnswers: wrongAnswers)),
-      );
-    }
     emit(
       QuizResultState(
         Result(correctAnswers: correctAnswers, wrongAnswers: wrongAnswers),
