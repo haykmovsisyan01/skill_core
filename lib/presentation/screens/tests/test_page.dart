@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:skill_core/data/models/test_model.dart';
 import 'package:skill_core/presentation/providers/bloc/quiz/quiz_bloc.dart';
 import 'package:skill_core/presentation/widgets/question.dart';
@@ -21,21 +20,14 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     model = ModalRoute.of(context)!.settings.arguments as TestModel;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            context.pop();
-            context.read<QuizBloc>().add(QuizDeleteEvent());
-          },
-          icon: Icon(Icons.arrow_back_rounded),
-        ),
-      ),
+      appBar: AppBar(),
       body: Column(
         children: [
           ScText(model.title, fontSize: 30),
           ScText(model.description, fontSize: 15),
           ScButton(
             onPressed: () {
+              context.read<QuizBloc>().add(QuizDeleteEvent());
               context.read<QuizBloc>().add(QuizStartEvent(model));
             },
             child: ScText('Start quiz'),
@@ -57,13 +49,11 @@ class _TestPageState extends State<TestPage> {
               if (state is QuizRightAnswerState) {
                 return QuestionWidget(
                   model.questions.elementAt(state.answerId),
-                  color: Colors.green,
                 );
               }
               if (state is QuizWrongAnswerState) {
                 return QuestionWidget(
                   model.questions.elementAt(state.answerId),
-                  color: Colors.red,
                 );
               }
               if (state is QuizResultState) {
@@ -76,5 +66,11 @@ class _TestPageState extends State<TestPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    context.read<QuizBloc>().add(QuizDeleteEvent());
+    super.deactivate();
   }
 }

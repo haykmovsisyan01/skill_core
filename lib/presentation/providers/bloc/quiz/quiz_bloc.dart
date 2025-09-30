@@ -54,11 +54,15 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     );
   }
 
-  restoreQuiz(QuizDeleteEvent event, Emitter<QuizState> emit) {
+  _resetQuiz() {
     currentTest = null;
     currentQuestion = 0;
     correctAnswers = 0;
     wrongAnswers = 0;
+  }
+
+  restoreQuiz(QuizDeleteEvent event, Emitter<QuizState> emit) {
+    _resetQuiz();
     emit(QuizInitialState());
   }
 }
