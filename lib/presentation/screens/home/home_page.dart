@@ -52,8 +52,17 @@ class _HomePageState extends ConsumerState<HomePage> {
     });
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.push(settingsRoute);
+            },
+            icon: Icon(Icons.account_circle_rounded),
+          ),
+        ],
+      ),
       body: IndexedStack(index: currentPage, children: bottomNavBarPages),
-
       bottomNavigationBar: BottomNavigationBar(
         items: bottomNavBarItems,
         currentIndex: currentPage,

@@ -38,3 +38,17 @@ String? validatePassword(String? password) {
   /// return null if password is correct
   return null;
 }
+
+String? validateNameAndSurname(String? text) {
+  if (text == null || text.isEmpty) {
+    return 'Please fill field!';
+  }
+
+  text = text.trim();
+
+  if (!validate(text, nameSurNameRegexp)) {
+    return 'Must be more than 2 symbols';
+  }
+
+  return null;
+}
