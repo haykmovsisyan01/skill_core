@@ -21,8 +21,10 @@ class _AppManagerState extends State<AppManager> {
         if (state is InitInitialState) {}
         if (state is InitCheckedState) {
           removeSplashScreen();
-          if (state.isAuthorized) {
+          if (state.isAuthorized && state.isUserOptionsDefined) {
             context.go(homeRoute);
+          } else if (!state.isUserOptionsDefined) {
+            context.go(userOptionsAdmit);
           } else {
             context.go(welcomeRoute);
           }

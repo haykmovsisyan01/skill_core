@@ -18,9 +18,10 @@ class SCApp extends ConsumerWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) =>
-              InitBloc(ref.read(sharedPreferencesUseCase))
-                ..add(InitCheckEvent()),
+          create: (_) => InitBloc(
+            ref.read(sharedPreferencesUseCase),
+            ref.read(userFireStoreUseCase),
+          )..add(InitCheckEvent()),
         ),
         BlocProvider(create: (_) => GuideBloc(ref.read(fetchAllGuidesUseCase))),
         BlocProvider(create: (_) => TestBloc(ref.read(fetchAllTestsUseCase))),

@@ -13,7 +13,9 @@ Future<void> main() async {
   runZonedGuarded(
     () async {
       var widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-      Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
       FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
       await initializeSharedPreferences();
       runApp(ProviderScope(child: SCApp()));

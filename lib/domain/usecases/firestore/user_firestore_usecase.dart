@@ -24,4 +24,12 @@ class UserFireStoreUseCase {
 
     return result.copyWithType<AppUser>(data: AppUser.fromApi(result.data!));
   }
+
+  Future<FireStoreResponseEntity<UserEntity>> fetchUserEntity(
+    String uid,
+  ) async {
+    final result = await repository.fetchUser(uid);
+
+    return result;
+  }
 }

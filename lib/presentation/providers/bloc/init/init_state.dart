@@ -7,6 +7,10 @@ final class InitInitialState extends InitState {}
 
 final class InitCheckedState extends InitState {
   final bool isAuthorized;
+  final bool isUserOptionsDefined;
 
-  InitCheckedState(this.isAuthorized);
+  InitCheckedState({
+    required this.isAuthorized,
+    required this.isUserOptionsDefined,
+  });
 }

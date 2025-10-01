@@ -4,6 +4,7 @@ import 'package:skill_core/presentation/screens/app_manager.dart';
 import 'package:skill_core/presentation/screens/guides/guide_page.dart';
 import 'package:skill_core/presentation/screens/guides/guides_page.dart';
 import 'package:skill_core/presentation/screens/home/home_page.dart';
+import 'package:skill_core/presentation/screens/home/user_options_admit_page.dart';
 import 'package:skill_core/presentation/screens/login/login_page.dart';
 import 'package:skill_core/presentation/screens/login/password_reset_page.dart';
 import 'package:skill_core/presentation/screens/settings/settings_page.dart';
@@ -19,6 +20,7 @@ const String signUpRoute = '/sign_up';
 const String loginRoute = '/login';
 const String passwordResetRoute = '/pass_reset';
 const String homeRoute = '/home';
+const String userOptionsAdmit = '/user_options_admit';
 const String settingsRoute = '/settings';
 const String guidesRoute = '/guides';
 const String guideRoute = '/guide';
@@ -66,6 +68,12 @@ GoRouter _router = GoRouter(
       path: homeRoute,
       pageBuilder: (context, state) {
         return MaterialPage(child: HomePage());
+      },
+    ),
+    GoRoute(
+      path: userOptionsAdmit,
+      pageBuilder: (context, state) {
+        return MaterialPage(child: UserOptionsAdmitPage());
       },
     ),
     GoRoute(
