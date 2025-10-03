@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skill_core/config/strings.dart';
 import 'package:skill_core/config/utils.dart';
 import 'package:skill_core/presentation/providers/auth_provider.dart';
+import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/widgets/sc_button.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
 
@@ -31,14 +33,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    // var state = ref.watch(authNotifierProvider.notifier);
-
     ref.listen<AsyncValue<AuthState>>(authNotifierProvider, (prev, next) {
       next.when(
         data: (state) {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message!)));
+          context.pushReplacement(loginRoute);
         },
         error: (error, stackTrace) {
           ScaffoldMessenger.of(context).showSnackBar(
