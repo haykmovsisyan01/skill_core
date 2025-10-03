@@ -32,6 +32,9 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           answered = false;
           isSelected = false;
         }
+        if (state is QuizNextQuestionEvent) {
+          isSelected = false;
+        }
       },
       child: Column(
         children: [
@@ -51,21 +54,32 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 isSelected = true;
               }
 
-              return ColoredBox(
-                color: isSelected ? getColor(index) : Colors.white,
-                child: IgnorePointer(
-                  ignoring: answered,
-                  child: GestureDetector(
-                    onTap: () {
-                      answered = true;
-                      selectedAnswer = index;
-                      context.read<QuizBloc>().add(
-                        QuizQuestionAnswerEvent(
-                          widget.model.answers.elementAt(index),
-                        ),
-                      );
-                    },
-                    child: ScText(widget.model.answers.elementAt(index)),
+              return IgnorePointer(
+                ignoring: answered,
+                child: GestureDetector(
+                  onTap: () {
+                    answered = true;
+                    selectedAnswer = index;
+                    context.read<QuizBloc>().add(
+                      QuizQuestionAnswerEvent(
+                        widget.model.answers.elementAt(index),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? getColor(index)
+                          : Theme.of(context).secondaryHeaderColor,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: ScText(
+                        widget.model.answers.elementAt(index),
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
               );
@@ -96,7 +110,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
   Color getColor(int index) {
     if (!answered) {
-      return Colors.white;
+      return Theme.of(context).secondaryHeaderColor;
     }
     if (index == rightAnswer) {
       return Colors.green;
