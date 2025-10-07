@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 class ScButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget child;
-  final Color? backgroundColor;
   final EdgeInsets? padding;
 
   const ScButton({
     super.key,
     required this.onPressed,
     required this.child,
-    this.backgroundColor,
     this.padding,
   });
 
@@ -22,7 +20,7 @@ class ScButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor: WidgetStatePropertyAll<Color>(
-            Theme.of(context).primaryColor,
+            Theme.of(context).colorScheme.primary,
           ),
           maximumSize: WidgetStatePropertyAll<Size>(
             Size(MediaQuery.sizeOf(context).width / 2, 60),
@@ -30,6 +28,7 @@ class ScButton extends StatelessWidget {
           minimumSize: WidgetStatePropertyAll<Size>(
             Size(MediaQuery.sizeOf(context).width / 3, 40),
           ),
+          shape: WidgetStatePropertyAll<OutlinedBorder?>(StadiumBorder()),
         ),
         child: child,
       ),

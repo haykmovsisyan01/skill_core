@@ -7,6 +7,7 @@ import 'package:skill_core/presentation/widgets/sc_text.dart';
 import 'package:skill_core/presentation/widgets/sc_text_field.dart';
 
 import '../../../config/utils.dart';
+import '../../providers/auth_provider.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
@@ -45,6 +46,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               Icon(Icons.account_box, size: 100),
               ScText(user?.name ?? 'No user name', fontSize: 20),
               ScText(user?.surname ?? 'No user surname', fontSize: 20),
+              ScText(user?.email ?? 'No user email', fontSize: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -109,6 +111,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       ),
                     )
                   : Container(),
+              ScButton(
+                onPressed: () {
+                  ref.read(authNotifierProvider.notifier).signOut();
+                },
+                child: ScText('Logout'),
+              ),
             ],
           ),
         ),

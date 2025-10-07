@@ -5,8 +5,6 @@ import 'package:skill_core/presentation/providers/auth_provider.dart';
 import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/screens/guides/guides_page.dart';
 import 'package:skill_core/presentation/screens/tests/tests_page.dart';
-import 'package:skill_core/presentation/widgets/sc_button.dart';
-import 'package:skill_core/presentation/widgets/sc_text.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -58,7 +56,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             onPressed: () {
               context.push(settingsRoute);
             },
-            icon: Icon(Icons.account_circle_rounded),
+            icon: Icon(Icons.account_circle_rounded, size: 40),
           ),
         ],
       ),
@@ -71,12 +69,6 @@ class _HomePageState extends ConsumerState<HomePage> {
             currentPage = index;
           });
         },
-      ),
-      floatingActionButton: ScButton(
-        onPressed: () {
-          ref.read(authNotifierProvider.notifier).signOut();
-        },
-        child: ScText('Logout'),
       ),
     );
   }

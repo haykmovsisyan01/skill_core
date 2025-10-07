@@ -73,11 +73,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                           : Theme.of(context).secondaryHeaderColor,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Align(
-                      alignment: Alignment.center,
+                    child: Center(
                       child: ScText(
                         widget.model.answers.elementAt(index),
-                        fontSize: 20,
+                        fontSize: 16,
                       ),
                     ),
                   ),

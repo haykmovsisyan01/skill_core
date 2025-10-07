@@ -10,6 +10,7 @@ import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
 import 'package:skill_core/presentation/widgets/sc_text_field.dart';
 
+import '../../../config/constants.dart';
 import '../../../config/strings.dart';
 import '../../../config/utils.dart';
 import '../../widgets/sc_button.dart';
@@ -138,12 +139,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Have password forgotten?',
-                      style: TextStyle(color: Colors.black),
+                      text: 'Forgot your password?',
+                      style: TextStyle(fontFamily: robotoFont),
                     ),
                     TextSpan(
-                      text: 'Click here',
-                      style: TextStyle(color: primaryColor),
+                      text: ' Click here',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontFamily: robotoFont,
+                      ),
                       recognizer: recognizer,
                     ),
                   ],

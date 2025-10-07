@@ -7,6 +7,8 @@ class ScText extends StatelessWidget {
   final Color? color;
   final EdgeInsets? padding;
   final String fontFamily;
+  final int? maxLines;
+  final TextOverflow? overFlow;
 
   const ScText(
     this.text, {
@@ -15,6 +17,8 @@ class ScText extends StatelessWidget {
     this.color,
     this.padding,
     this.fontFamily = robotoFont,
+    this.maxLines,
+    this.overFlow,
   });
 
   @override
@@ -23,10 +27,12 @@ class ScText extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       child: Text(
         text,
+        maxLines: maxLines,
+        overflow: overFlow,
         style: TextStyle(
-          // fontFamily: fontFamily,
-          color: color ?? Colors.black,
           fontSize: fontSize,
+          color: color ?? Theme.of(context).colorScheme.onSurface,
+          fontFamily: fontFamily,
         ),
       ),
     );

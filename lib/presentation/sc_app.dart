@@ -9,6 +9,7 @@ import 'package:skill_core/presentation/providers/dependencies.dart';
 import 'package:skill_core/presentation/routes.dart';
 
 import '../config/colors.dart';
+import '../config/constants.dart';
 
 class SCApp extends ConsumerWidget {
   const SCApp({super.key});
@@ -28,8 +29,11 @@ class SCApp extends ConsumerWidget {
         BlocProvider(create: (_) => QuizBloc()),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: router,
-        theme: ThemeData(primaryColor: primaryColor),
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skill_core/config/colors.dart';
 import 'package:skill_core/presentation/routes.dart';
 import 'package:skill_core/presentation/widgets/sc_button.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
@@ -45,26 +44,25 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
               ScText('Welcome to $appName!', fontSize: 30),
               SizedBox(height: MediaQuery.sizeOf(context).height / 25),
-              ScText(skillCoreSlogan, fontSize: 15, color: Colors.black),
-              Expanded(flex: 3, child: Placeholder()),
+              ScText(skillCoreSlogan, fontSize: 15),
+              Expanded(flex: 3, child: Image.asset(welcomeImage)),
               ScButton(
                 onPressed: () {
                   context.push(signUpRoute);
                 },
-                child: ScText(getStarted, color: Colors.white, fontSize: 20),
+                child: ScText(getStarted, fontSize: 20),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: RichText(
                   text: TextSpan(
                     children: [
+                      TextSpan(text: '$alreadyHaveAcc '),
                       TextSpan(
-                        text: alreadyHaveAcc,
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      TextSpan(
-                        text: login,
-                        style: TextStyle(color: primaryColor),
+                        text: '$login!',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         recognizer: recognizer,
                       ),
                     ],
@@ -73,7 +71,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
 
               /// Text
-              Expanded(flex: 1, child: Placeholder()),
+              Expanded(flex: 1, child: Container()),
             ],
           ),
         ),

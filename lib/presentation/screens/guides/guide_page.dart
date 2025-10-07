@@ -22,13 +22,17 @@ class _GuidePageState extends State<GuidePage> {
     model = ModalRoute.of(context)!.settings.arguments as GuideModel;
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ScText(model.title, fontSize: 30),
-          ScText(model.author, fontSize: 15),
-          ScText(model.content),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ScText(model.title, fontSize: 30),
+            ScText('Author: ${model.author}', fontSize: 15),
+            SizedBox(height: 20),
+            ScText(model.content, fontSize: 14),
+          ],
+        ),
       ),
     );
   }

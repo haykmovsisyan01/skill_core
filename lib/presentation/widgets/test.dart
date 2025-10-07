@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skill_core/presentation/routes.dart';
-import 'package:skill_core/presentation/widgets/sc_button.dart';
 import 'package:skill_core/presentation/widgets/sc_text.dart';
 
 import '../../data/models/test_model.dart';
@@ -24,16 +23,21 @@ class TestWidget extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              ScText(test.title, fontSize: 25),
-              ScButton(
+              Expanded(
+                child: ScText(
+                  test.title,
+                  fontSize: 18,
+                  maxLines: 2,
+                  overFlow: TextOverflow.ellipsis,
+                ),
+              ),
+              IconButton(
                 onPressed: () {
                   context.push(testRoute, extra: test);
                 },
-                child: ScText('Pass', fontSize: 15),
+                icon: Icon(Icons.navigate_next, size: 35),
               ),
             ],
           ),
