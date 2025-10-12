@@ -6,9 +6,13 @@ part 'guide.g.dart';
 @freezed
 @JsonSerializable()
 class GuideEntity with _$GuideEntity {
+  @override
   final String title;
+  @override
   final int id;
+  @override
   final String author;
+  @override
   final String content;
 
   GuideEntity({

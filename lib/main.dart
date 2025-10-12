@@ -21,7 +21,6 @@ Future<void> main() async {
       runApp(ProviderScope(child: SCApp()));
     },
     (error, stack) {
-      /// report to firebase
       log(error.toString(), stackTrace: stack);
     },
   );

@@ -8,7 +8,6 @@ import 'package:skill_core/presentation/providers/bloc/test/test_bloc.dart';
 import 'package:skill_core/presentation/providers/dependencies.dart';
 import 'package:skill_core/presentation/routes.dart';
 
-import '../config/colors.dart';
 import '../config/constants.dart';
 
 class SCApp extends ConsumerWidget {
@@ -19,10 +18,12 @@ class SCApp extends ConsumerWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => InitBloc(
+          create: (_) =>
+          InitBloc(
             ref.read(sharedPreferencesUseCase),
             ref.read(userFireStoreUseCase),
-          )..add(InitCheckEvent()),
+          )
+            ..add(InitCheckEvent()),
         ),
         BlocProvider(create: (_) => GuideBloc(ref.read(fetchAllGuidesUseCase))),
         BlocProvider(create: (_) => TestBloc(ref.read(fetchAllTestsUseCase))),

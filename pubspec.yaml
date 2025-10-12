@@ -16,7 +16,6 @@ dependencies:
   flutter_native_splash: ^2.4.6
   go_router: ^16.0.0
   get_it: ^8.0.3
-  firebase_analytics: ^11.5.2
   firebase_auth: ^5.6.2
   flutter_riverpod: ^2.6.1
   json_serializable: ^6.10.0
@@ -31,7 +30,6 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
   custom_lint: ^0.8.0
-  mockito: ^5.5.0
   build_runner: ^2.7.0
   mocktail: ^1.0.4
 flutter:
@@ -51,7 +49,7 @@ flutter:
 flutter_native_splash:
   color: "#9438c7"
   android_12:
-    image: assets/logos/logo_dark.png
+    image: assets/logos/logo_light.png
     color: "#f6f2f3"
     image_dark: assets/logos/logo_dark.png
     color_dark: "#0b2136"

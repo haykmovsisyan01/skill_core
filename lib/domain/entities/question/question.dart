@@ -6,8 +6,11 @@ part 'question.g.dart';
 @freezed
 @JsonSerializable()
 class QuestionEntity with _$QuestionEntity {
+  @override
   final String question;
+  @override
   final Set<String> answers;
+  @override
   final String rightAnswer;
 
   QuestionEntity({

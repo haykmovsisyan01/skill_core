@@ -7,8 +7,11 @@ part 'login_response.g.dart';
 @freezed
 @JsonSerializable()
 class LoginResponseEntity with _$LoginResponseEntity {
+  @override
   final String message;
+  @override
   final bool failed;
+  @override
   final TokenEntity? token;
 
   LoginResponseEntity({

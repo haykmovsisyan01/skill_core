@@ -6,7 +6,9 @@ part 'reg_request.g.dart';
 @freezed
 @JsonSerializable()
 class RegRequestEntity with _$RegRequestEntity {
+  @override
   final String email;
+  @override
   final String password;
 
   RegRequestEntity({required this.email, required this.password});

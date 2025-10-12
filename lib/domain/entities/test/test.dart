@@ -7,9 +7,13 @@ part 'test.g.dart';
 @freezed
 @JsonSerializable()
 class TestEntity with _$TestEntity {
+  @override
   final String title;
+  @override
   final String description;
+  @override
   final int id;
+  @override
   final List<QuestionEntity> questions;
 
   TestEntity({

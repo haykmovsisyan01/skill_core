@@ -7,10 +7,15 @@ part 'user.g.dart';
 @freezed
 @JsonSerializable()
 class UserEntity with _$UserEntity {
+  @override
   final String? name;
+  @override
   final String? surname;
+  @override
   final String? email;
+  @override
   final String? uid;
+  @override
   final DateTime? createdDate;
 
   UserEntity({this.name, this.surname, this.email, this.uid, this.createdDate});

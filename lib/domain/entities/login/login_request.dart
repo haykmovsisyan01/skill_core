@@ -6,7 +6,9 @@ part 'login_request.g.dart';
 @freezed
 @JsonSerializable()
 class LoginRequestEntity with _$LoginRequestEntity {
+  @override
   final String email;
+  @override
   final String password;
 
   LoginRequestEntity({required this.email, required this.password});

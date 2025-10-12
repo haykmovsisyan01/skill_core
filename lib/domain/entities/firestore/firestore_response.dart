@@ -5,9 +5,13 @@ part 'firestore_response.freezed.dart';
 @JsonSerializable()
 @freezed
 class FireStoreResponseEntity<T> with _$FireStoreResponseEntity<T> {
+  @override
   final String? message;
+  @override
   final String? code;
+  @override
   final bool failed;
+  @override
   final T? data;
 
   FireStoreResponseEntity({

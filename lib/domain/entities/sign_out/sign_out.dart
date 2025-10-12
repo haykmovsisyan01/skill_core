@@ -6,7 +6,9 @@ part 'sign_out.g.dart';
 @freezed
 @JsonSerializable()
 class SignOutEntity with _$SignOutEntity {
+  @override
   final String message;
+  @override
   final bool failed;
 
   SignOutEntity({required this.message, required this.failed});

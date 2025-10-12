@@ -6,8 +6,11 @@ part 'reg_response.g.dart';
 @freezed
 @JsonSerializable()
 class RegResponseEntity with _$RegResponseEntity {
+  @override
   final String message;
+  @override
   final String? uid;
+  @override
   final bool failed;
 
   RegResponseEntity({required this.message, this.uid, required this.failed});

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skill_core/config/colors.dart';
 import 'package:skill_core/presentation/providers/auth_provider.dart';
 import 'package:skill_core/presentation/providers/bloc/init/init_bloc.dart';
 import 'package:skill_core/presentation/routes.dart';
