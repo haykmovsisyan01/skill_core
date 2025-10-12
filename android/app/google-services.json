@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668914152107",
+    "project_id": "skill-core-a3481",
+    "storage_bucket": "skill-core-a3481.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668914152107:android:678fd2853c5f5b9def7dee",
+        "android_client_info": {
+          "package_name": "com.haykm.skill_core"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfxbJpp283MD7pXCnus2MlsDsR5wgcYFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

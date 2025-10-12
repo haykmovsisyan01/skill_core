@@ -1,0 +1,132 @@
+import 'dart:async';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skill_core/domain/entities/login/login_request.dart';
+import 'package:skill_core/domain/entities/user/user.dart';
+import 'package:skill_core/presentation/providers/dependencies.dart';
+import 'package:skill_core/presentation/providers/user_provider.dart';
+
+import '../../data/models/user_model.dart';
+import '../../domain/entities/reg/reg_request.dart';
+
+final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(
+  () => AuthNotifier(),
+);
+
+class AuthNotifier extends AsyncNotifier<AuthState> {
+  @override
+  FutureOr<AuthState> build() {
+    return AuthState(message: 'Initial state');
+  }
+
+  Future<void> register(String email, String password) async {
+    state = AsyncValue.loading();
+    final registerUseCase = ref.read(regUseCase);
+    final userUseCase = ref.read(userFireStoreUseCase);
+
+    final entity = await registerUseCase.register(
+      RegRequestEntity(email: email, password: password),
+    );
+
+    if (!entity.failed) {
+      userUseCase.addUser(
+        entity.uid!,
+        UserEntity(email: email, uid: entity.uid, createdDate: DateTime.now()),
+      );
+      state = AsyncValue.data(AuthState(message: entity.message));
+    } else {
+      state = AsyncValue.error(
+        AuthState(errorMessage: entity.message),
+        StackTrace.current,
+      );
+    }
+  }
+
+  Future<void> login(String email, String password) async {
+    state = AsyncValue.loading();
+    final useCase = ref.read(loginUseCase);
+    final entity = await useCase.login(
+      LoginRequestEntity(email: email, password: password),
+    );
+
+    if (!entity.failed) {
+      /// Put token into shared preferences
+      await ref
+          .read(sharedPreferencesUseCase)
+          .put('token', entity.token!.token);
+
+      state = AsyncValue.data(AuthState(message: entity.message));
+    } else {
+      state = AsyncValue.error(
+        AuthState(errorMessage: entity.message),
+        StackTrace.current,
+      );
+    }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    state = AsyncValue.loading();
+
+    final useCase = ref.watch(sendPasswordResetEmailUseCase);
+
+    await useCase.sendPasswordResetEmail(email);
+
+    state = AsyncValue.data(
+      AuthState(message: 'Success', isPasswordResetMailSent: true),
+    );
+  }
+
+  Future<void> signOut() async {
+    final useCase = ref.read(signOutUseCase);
+
+    final entity = await useCase.signOut();
+
+    if (!entity.failed) {
+      await ref.watch(sharedPreferencesUseCase).remove('token');
+      ref.read(appUserState.notifier).state = null;
+      state = AsyncValue.data(AuthState(message: entity.message));
+    } else {
+      state = AsyncValue.error(
+        AuthState(errorMessage: entity.message),
+        StackTrace.current,
+      );
+    }
+  }
+}
+
+class AuthState {
+  final String? message;
+  final String? errorMessage;
+  final AppUser? user;
+  final bool isPasswordResetMailSent;
+
+  AuthState({
+    this.message,
+    this.errorMessage,
+    this.user,
+    this.isPasswordResetMailSent = false,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AuthState &&
+          runtimeType == other.runtimeType &&
+          message == other.message;
+
+  @override
+  int get hashCode => message.hashCode;
+
+  AuthState copyWith(
+    String? message,
+    String? errorMessage,
+    AppUser? user,
+    bool? isPasswordResetMailSent,
+  ) => AuthState(
+    message: message ?? this.message,
+    errorMessage: errorMessage ?? this.errorMessage,
+    user: user ?? this.user,
+    isPasswordResetMailSent:
+        isPasswordResetMailSent ?? this.isPasswordResetMailSent,
+  );
+}
