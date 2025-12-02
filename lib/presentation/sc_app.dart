@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skill_core/presentation/providers/bloc/guide/guide_bloc.dart';
 import 'package:skill_core/presentation/providers/bloc/init/init_bloc.dart';
 import 'package:skill_core/presentation/providers/bloc/quiz/quiz_bloc.dart';
+import 'package:skill_core/presentation/providers/bloc/settings/settings_bloc.dart';
 import 'package:skill_core/presentation/providers/bloc/test/test_bloc.dart';
 import 'package:skill_core/presentation/providers/dependencies.dart';
 import 'package:skill_core/presentation/routes.dart';
@@ -18,23 +19,34 @@ class SCApp extends ConsumerWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) =>
-          InitBloc(
+          create: (_) => InitBloc(
             ref.read(sharedPreferencesUseCase),
             ref.read(userFireStoreUseCase),
-          )
-            ..add(InitCheckEvent()),
+          )..add(InitCheckEvent()),
         ),
         BlocProvider(create: (_) => GuideBloc(ref.read(fetchAllGuidesUseCase))),
         BlocProvider(create: (_) => TestBloc(ref.read(fetchAllTestsUseCase))),
         BlocProvider(create: (_) => QuizBloc()),
+        BlocProvider(
+          create: (_) =>
+              SettingsBloc(ref.read(sharedPreferencesUseCase))
+                ..add(SettingsSetInitialThemeEvent('light')),
+        ),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routerConfig: router,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.system,
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          String themeMode = 'light';
+          if (state is SettingsThemeFetchedState) {
+            themeMode = state.themeMode;
+          }
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: router,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeMode == 'light' ? ThemeMode.light : ThemeMode.dark,
+          );
+        },
       ),
     );
   }

@@ -18,6 +18,7 @@ Future<void> main() async {
       );
       FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
       await initializeSharedPreferences();
+
       runApp(ProviderScope(child: SCApp()));
     },
     (error, stack) {
