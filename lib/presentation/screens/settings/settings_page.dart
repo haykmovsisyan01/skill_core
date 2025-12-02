@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skill_core/data/models/user_model.dart';
 import 'package:skill_core/presentation/providers/user_provider.dart';
@@ -9,7 +8,6 @@ import 'package:skill_core/presentation/widgets/sc_text_field.dart';
 
 import '../../../config/utils.dart';
 import '../../providers/auth_provider.dart';
-import '../../providers/bloc/settings/settings_bloc.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
@@ -28,8 +26,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
   bool editMode = false;
 
-  late bool isLightTheme;
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -41,9 +37,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     AppUser? user = ref.watch(appUserState);
-    final settingsBloc = context.watch<SettingsBloc>();
-
-    isLightTheme = settingsBloc.theme == 'light';
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -118,31 +111,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       ),
                     )
                   : Container(),
-              BlocBuilder<SettingsBloc, SettingsState>(
-                builder: (context, state) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ScText('Dark'),
-                      Switch(
-                        value: isLightTheme,
-                        onChanged: (value) {
-                          setState(() {
-                            isLightTheme = !isLightTheme;
-                            print(isLightTheme);
-                            context.read<SettingsBloc>().add(
-                              SettingsChangeThemeEvent(
-                                isLightTheme ? 'light' : 'dark',
-                              ),
-                            );
-                          });
-                        },
-                      ),
-                      ScText('Light'),
-                    ],
-                  );
-                },
-              ),
               ScButton(
                 onPressed: () {
                   ref.read(authNotifierProvider.notifier).signOut();

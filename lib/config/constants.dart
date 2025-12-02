@@ -1,6 +1,5 @@
 // logos
 import 'package:flutter/material.dart';
-import 'package:skill_core/config/strings.dart';
 
 const String appLogoLightPath = 'assets/logos/logo_light.png';
 const String appLogoDarkPath = 'assets/logos/logo_dark.png';
@@ -91,5 +90,3 @@ final ThemeData darkTheme = ThemeData(
   ),
   iconTheme: IconThemeData(color: Color(0xFF90CAF9)),
 );
-
-Map<String, ThemeData> themes = {light: lightTheme, dark: darkTheme};

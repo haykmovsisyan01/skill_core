@@ -8,6 +8,3 @@ const String email = 'Email';
 const String password = 'Password';
 const String confirmPassword = 'Confirm Password';
 const String unknownError = 'Unknown error';
-
-const String light = 'light';
-const String dark = 'dark';
