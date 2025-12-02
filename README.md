@@ -1,6 +1,7 @@
 # Skill Core
 
 ## This is my portfolio project. This project is not for a production, this is supposed to show my skills.
+## In Skill Core you can read various articles and take different courses.
 
 ## Used libraries
 
